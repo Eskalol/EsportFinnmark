@@ -20,7 +20,7 @@ var events = {
 function registerEvents(LanRegistration) {
 	for (var e in events) {
 		let event = events[e];
-		LanRegistration.post(em emitEvent(event));
+		LanRegistration.post(e, emitEvent(event));
 	}
 }
 

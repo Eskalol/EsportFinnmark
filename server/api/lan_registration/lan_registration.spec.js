@@ -38,7 +38,7 @@ var lanRegistrationIndex = proxyquire('./index', {
   '../../auth/auth.service': authServiceStub
 });
 
-describe('User API Router:', () => {
+describe('Lan registration API Router:', () => {
 	it('should return an express router instance', () => {
 		expect(lanRegistrationIndex).to.equal(routerStub);
 	});
