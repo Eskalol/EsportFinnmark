@@ -10,7 +10,6 @@
 
 'use strict';
 
-import jsonpatch from 'fast-json-patch';
 import LanRegistration from './lan_registration.model';
 
 function respondWithResult(res, statusCode) {
