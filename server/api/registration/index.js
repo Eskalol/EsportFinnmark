@@ -2,14 +2,17 @@
 
 import {Router} from 'express';
 import * as controller from './registration.controller';
+import * as auth from '../../auth/auth.service';
 
 var router = new Router();
 
-router.get('/', controller.index);
-router.get('/:id', controller.show);
-router.post('/', controller.create);
-router.put('/:id', controller.upsert);
-router.patch('/:id', controller.patch);
-router.delete('/:id', controller.destroy);
+router.get('/me', auth.isAuthenticated(), controller.indexMe);
+router.post('/me', auth.isAuthenticated(), controller.createMe);
+router.get('/', auth.hasRole('admin'), controller.index);
+router.get('/:id', auth.hasRole('admin'), controller.show);
+router.post('/', auth.hasRole('admin'), controller.create);
+router.put('/:id', auth.hasRole('admin'), controller.upsert);
+router.patch('/:id', auth.hasRole('admin'), controller.patch);
+router.delete('/:id', auth.hasRole('admin'), controller.destroy);
 
 module.exports = router;

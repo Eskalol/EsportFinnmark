@@ -115,3 +115,18 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+// Creates a new Registration in the DB for request user
+export function createMe(req, res) {
+  return Registration.create(Object.assign({user: req.user._id}, req.body))
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
+}
+
+// Gets a single Registration from the DB for request user
+export function indexMe(req, res) {
+  return Registration.findOne({user: req.user._id}).exec()
+    .then(handleEntityNotFound(res))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
+}

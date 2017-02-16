@@ -10,7 +10,18 @@ var registrationCtrlStub = {
   create: 'registrationCtrl.create',
   upsert: 'registrationCtrl.upsert',
   patch: 'registrationCtrl.patch',
-  destroy: 'registrationCtrl.destroy'
+  destroy: 'registrationCtrl.destroy',
+  indexMe: 'registrationCtrl.indexMe',
+  createMe: 'registrationCtrl.createMe'
+};
+
+var authServiceStub = {
+  isAuthenticated() {
+    return 'authService.isAuthenticated';
+  },
+  hasRole(role) {
+    return `authService.hasRole.${role}`;
+  }
 };
 
 var routerStub = {
@@ -28,7 +39,8 @@ var registrationIndex = proxyquire('./index.js', {
       return routerStub;
     }
   },
-  './registration.controller': registrationCtrlStub
+  './registration.controller': registrationCtrlStub,
+  '../../auth/auth.service': authServiceStub
 });
 
 describe('Registration API Router:', function() {
@@ -37,49 +49,65 @@ describe('Registration API Router:', function() {
   });
 
   describe('GET /api/lan/registration', function() {
-    it('should route to registration.controller.index', function() {
+    it('should verify admin role and route route to registration.controller.index', function() {
       expect(routerStub.get
-        .withArgs('/', 'registrationCtrl.index')
+        .withArgs('/', 'authService.hasRole.admin', 'registrationCtrl.index')
         ).to.have.been.calledOnce;
     });
   });
 
   describe('GET /api/lan/registration/:id', function() {
-    it('should route to registration.controller.show', function() {
+    it('should verify admin role and route route to registration.controller.show', function() {
       expect(routerStub.get
-        .withArgs('/:id', 'registrationCtrl.show')
+        .withArgs('/:id', 'authService.hasRole.admin', 'registrationCtrl.show')
         ).to.have.been.calledOnce;
     });
   });
 
   describe('POST /api/lan/registration', function() {
-    it('should route to registration.controller.create', function() {
+    it('should verify admin role and route route to registration.controller.create', function() {
       expect(routerStub.post
-        .withArgs('/', 'registrationCtrl.create')
+        .withArgs('/', 'authService.hasRole.admin', 'registrationCtrl.create')
         ).to.have.been.calledOnce;
     });
   });
 
   describe('PUT /api/lan/registration/:id', function() {
-    it('should route to registration.controller.upsert', function() {
+    it('should verify admin role and route route to registration.controller.upsert', function() {
       expect(routerStub.put
-        .withArgs('/:id', 'registrationCtrl.upsert')
+        .withArgs('/:id', 'authService.hasRole.admin', 'registrationCtrl.upsert')
         ).to.have.been.calledOnce;
     });
   });
 
   describe('PATCH /api/lan/registration/:id', function() {
-    it('should route to registration.controller.patch', function() {
+    it('should verify admin role and route route to registration.controller.patch', function() {
       expect(routerStub.patch
-        .withArgs('/:id', 'registrationCtrl.patch')
+        .withArgs('/:id', 'authService.hasRole.admin', 'registrationCtrl.patch')
         ).to.have.been.calledOnce;
     });
   });
 
   describe('DELETE /api/lan/registration/:id', function() {
-    it('should route to registration.controller.destroy', function() {
+    it('should verify admin role and route route to registration.controller.destroy', function() {
       expect(routerStub.delete
-        .withArgs('/:id', 'registrationCtrl.destroy')
+        .withArgs('/:id', 'authService.hasRole.admin', 'registrationCtrl.destroy')
+        ).to.have.been.calledOnce;
+    });
+  });
+
+  describe('GET /api/lan/registration/me', function() {
+    it('should be authenticated and route to registration.controller.indexMe', function() {
+      expect(routerStub.get
+        .withArgs('/me', 'authService.isAuthenticated', 'registrationCtrl.indexMe')
+        ).to.have.been.calledOnce;
+    });
+  });
+
+  describe('POST /api/lan/registration/me', function() {
+    it('should be authenticated and route to registration.controller.createMe', function() {
+      expect(routerStub.post
+        .withArgs('/me', 'authService.isAuthenticated', 'registrationCtrl.createMe')
         ).to.have.been.calledOnce;
     });
   });
