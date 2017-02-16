@@ -1,12 +1,13 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import {registerEvents} from './parent.events.js';
+import {registerEvents} from './parent.events';
 
-var parentSchema = new mongoose.Schema({
+var ParentSchema = new mongoose.Schema({
   lanregistration: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'lanregistration'
+    ref: 'Registration',
+    required: true
   },
   name: {
     type: String,
@@ -26,5 +27,5 @@ var parentSchema = new mongoose.Schema({
   }
 });
 
-registerEvents(parentSchema);
-export default mongoose.model('parent', parentSchema);
+registerEvents(ParentSchema);
+export default mongoose.model('Parent', ParentSchema);

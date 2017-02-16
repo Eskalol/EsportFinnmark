@@ -1,9 +1,9 @@
 'use strict';
 
 import mongoose from 'mongoose';
-import {registerEvents} from './lan_registration.events';
+import {registerEvents} from './registration.events';
 
-var lanRegistrationSchema = new mongoose.Schema({
+var RegistrationSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
@@ -31,5 +31,5 @@ var lanRegistrationSchema = new mongoose.Schema({
   }
 });
 
-registerEvents(lanRegistrationSchema);
-export default mongoose.model('lanregistration', lanRegistrationSchema);
+registerEvents(RegistrationSchema);
+export default mongoose.model('Registration', RegistrationSchema);

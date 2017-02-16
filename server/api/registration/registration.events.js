@@ -1,14 +1,14 @@
 /**
- * Parent model events
+ * Registration model events
  */
 
 'use strict';
 
 import {EventEmitter} from 'events';
-var ParentEvents = new EventEmitter();
+var RegistrationEvents = new EventEmitter();
 
 // Set max event listeners (0 == unlimited)
-ParentEvents.setMaxListeners(0);
+RegistrationEvents.setMaxListeners(0);
 
 // Model events
 var events = {
@@ -17,19 +17,19 @@ var events = {
 };
 
 // Register the event emitter to the model events
-function registerEvents(Parent) {
+function registerEvents(Registration) {
   for(var e in events) {
     let event = events[e];
-    Parent.post(e, emitEvent(event));
+    Registration.post(e, emitEvent(event));
   }
 }
 
 function emitEvent(event) {
   return function(doc) {
-    ParentEvents.emit(event + ':' + doc._id, doc);
-    ParentEvents.emit(event, doc);
+    RegistrationEvents.emit(event + ':' + doc._id, doc);
+    RegistrationEvents.emit(event, doc);
   };
 }
 
 export {registerEvents};
-export default ParentEvents;
+export default RegistrationEvents;

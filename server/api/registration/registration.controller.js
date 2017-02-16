@@ -1,17 +1,17 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
- * GET     /api/lan/parent              ->  index
- * POST    /api/lan/parent              ->  create
- * GET     /api/lan/parent/:id          ->  show
- * PUT     /api/lan/parent/:id          ->  upsert
- * PATCH   /api/lan/parent/:id          ->  patch
- * DELETE  /api/lan/parent/:id          ->  destroy
+ * GET     /api/lan/registration              ->  index
+ * POST    /api/lan/registration              ->  create
+ * GET     /api/lan/registration/:id          ->  show
+ * PUT     /api/lan/registration/:id          ->  upsert
+ * PATCH   /api/lan/registration/:id          ->  patch
+ * DELETE  /api/lan/registration/:id          ->  destroy
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
-import Parent from './parent.model';
+import Registration from './registration.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -63,54 +63,54 @@ function handleError(res, statusCode) {
   };
 }
 
-// Gets a list of Parents
+// Gets a list of Registrations
 export function index(req, res) {
-  return Parent.find().exec()
+  return Registration.find().exec()
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Gets a single Parent from the DB
+// Gets a single Registration from the DB
 export function show(req, res) {
-  return Parent.findById(req.params.id).exec()
+  return Registration.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Creates a new Parent in the DB
+// Creates a new Registration in the DB
 export function create(req, res) {
-  return Parent.create(req.body)
+  return Registration.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
 
-// Upserts the given Parent in the DB at the specified ID
+// Upserts the given Registration in the DB at the specified ID
 export function upsert(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
-  return Parent.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
+  return Registration.findOneAndUpdate({_id: req.params.id}, req.body, {new: true, upsert: true, setDefaultsOnInsert: true, runValidators: true}).exec()
 
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Updates an existing Parent in the DB
+// Updates an existing Registration in the DB
 export function patch(req, res) {
   if(req.body._id) {
     delete req.body._id;
   }
-  return Parent.findById(req.params.id).exec()
+  return Registration.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(patchUpdates(req.body))
     .then(respondWithResult(res))
     .catch(handleError(res));
 }
 
-// Deletes a Parent from the DB
+// Deletes a Registration from the DB
 export function destroy(req, res) {
-  return Parent.findById(req.params.id).exec()
+  return Registration.findById(req.params.id).exec()
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
