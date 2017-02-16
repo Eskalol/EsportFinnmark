@@ -251,6 +251,13 @@ describe('Parent API:', function() {
     });
 
     describe('DELETE /api/lan/parent/:id', function() {
+      it('should respond with a 401 when not authenticated', function(done) {
+        request(app)
+          .delete(`/api/lan/parent/${newParent._id}`)
+          .expect(401)
+          .end(done);
+      });
+
       it('should respond with 204 on successful removal', function(done) {
         request(app)
           .delete(`/api/lan/parent/${newParent._id}`)
@@ -349,7 +356,6 @@ describe('Parent API:', function() {
               return done(err);
             }
             newParent = res.body;
-            console.log(newParent);
             expect(newParent.registration).to.equal(`${registration._id}`);
             expect(newParent.name).to.equal('Imba');
             expect(newParent.email).to.equal('noob@example.com');
@@ -395,6 +401,84 @@ describe('Parent API:', function() {
         request(app)
           .get('/api/lan/parent/me')
           .expect(401)
+          .end(done);
+      });
+    });
+
+    describe('GET /api/lan/parent', function() {
+      it('should not have access to admin api as user', function(done) {
+        request(app)
+          .get('/api/lan/parent')
+          .set('authorization', `Bearer ${token}`)
+          .expect(403)
+          .end(done);
+      });
+    });
+
+    describe('POST /api/lan/parent', function() {
+      it('should not have access to admin api as user', function(done) {
+        request(app)
+          .post('/api/lan/parent')
+          .send({
+            registration: registration._id,
+            name: 'Cool',
+            email: "lol@example.com",
+            phone: "12345678",
+            address: "street cool"
+          })
+          .set('authorization', `Bearer ${token}`)
+          .expect(403)
+          .end(done);
+      });
+    });
+
+    describe('GET /api/lan/parent/:id', function() {
+      it('should not have access to admin api as user', function(done) {
+        request(app)
+          .get(`/api/lan/parent/${newParent._id}`)
+          .set('authorization', `Bearer ${token}`)
+          .expect(403)
+          .end(done);
+      });
+    });
+
+    describe('PUT /api/lan/parent', function() {
+      it('should not have access to admin api as user', function(done) {
+        request(app)
+          .put(`/api/lan/parent/${newParent._id}`)
+          .send({
+            registration: registration._id,
+            name: 'Cool',
+            email: "lol@example.com",
+            phone: "98764312",
+            address: "new cool"
+          })
+          .set('authorization', `Bearer ${token}`)
+          .expect(403)
+          .end(done);
+      });
+    });
+
+    describe('PATCH /api/lan/parent', function() {
+      it('should not have access to admin api as user', function(done) {
+        request(app)
+          .patch(`/api/lan/parent/${newParent._id}`)
+          .send([
+            { op: 'replace', path: '/name', value: 'Patched name' },
+            { op: 'replace', path: '/email', value: 'lol@lol.com' }
+          ])
+          .set('authorization', `Bearer ${token}`)
+          .expect(403)
+          .end(done);
+      });
+    });
+
+    describe('DELETE /api/lan/parent', function() {
+      it('should not have access to admin api as user', function(done) {
+        request(app)
+          .delete(`/api/lan/parent/${newParent._id}`)
+          .set('authorization', `Bearer ${token}`)
+          .expect(403)
           .end(done);
       });
     });
