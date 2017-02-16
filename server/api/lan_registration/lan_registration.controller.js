@@ -22,13 +22,6 @@ function respondWithResult(res, statusCode) {
   };
 }
 
-function validationError(res, statusCode) {
-  statusCode = statusCode || 422;
-  return function(err) {
-    return res.status(statusCode).json(err);
-  };
-}
-
 function handleEntityNotFound(res) {
   return function(entity) {
     if(!entity) {
@@ -52,7 +45,7 @@ function removeEntity(res) {
       return entity.remove()
         .then(() => {
           res.status(204).end();
-      });
+        });
     }
   };
 }
@@ -61,7 +54,7 @@ function removeEntity(res) {
  * Create a new lan registration for request user
  */
 export function create(req, res) {
-  return LanRegistration.create(Object.assign({'user': req.user._id}, req.body))
+  return LanRegistration.create(Object.assign({user: req.user._id}, req.body))
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
 }
@@ -82,7 +75,7 @@ export function list(req, res) {
 export function index(req, res) {
   var userId = req.user._id;
   return LanRegistration.findOne({
-      'user': userId
+    user: userId
   }).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))
@@ -106,7 +99,7 @@ export function show(req, res) {
 export function destroy(req, res) {
   var userId = req.user._id;
   return LanRegistration.findOne({
-      'user': userId
+    user: userId
   }).exec()
     .then(handleEntityNotFound(res))
     .then(respondWithResult(res))

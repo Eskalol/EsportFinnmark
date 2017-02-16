@@ -23,13 +23,6 @@ function respondWithResult(res, statusCode) {
   };
 }
 
-function validationError(res, statusCode) {
-  statusCode = statusCode || 422;
-  return function(err) {
-    return res.status(statusCode).json(err);
-  };
-}
-
 function handleEntityNotFound(res) {
   return function(entity) {
     if(!entity) {
@@ -51,8 +44,8 @@ function removeEntity(res) {
   return function(entity) {
     if(entity) {
       return entity.remove()
-        .then(() => {
-          res.status(204).end();
+      .then(() => {
+        res.status(204).end();
       });
     }
   };
@@ -62,14 +55,14 @@ function removeEntity(res) {
  * Get a list of parents for request user
  */
 export function list(req, res) {
-	var userId = req.user._id;
-	var registration = LanRegistration.findOne({
-		'user': userId
-	});
-	return Parent.find({'lanregistration': registration._id}).exec()
-		.then((handleEntityNotFound(res)))
-		.then(respondWithResult(res))
-		.catch(handleError(res))
+  var userId = req.user._id;
+  var registration = LanRegistration.findOne({
+    user: userId
+  });
+  return Parent.find({lanregistration: registration._id}).exec()
+    .then((handleEntityNotFound(res)))
+    .then(respondWithResult(res))
+    .catch(handleError(res));
 }
 
 /**
@@ -77,26 +70,26 @@ export function list(req, res) {
  * restriction: admin
  */
 export function show(req, res) {
-	return Parents.find({
-		'lanregistration': req.params.id
-	}).exec()
-		.then(handleEntityNotFound(res))
-	  .then(respondWithResult(res))
-	  .catch(handleError(res));
+  return Parent.find({
+    lanregistration: req.params.id
+  }).exec()
+  .then(handleEntityNotFound(res))
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 /**
  * Create Parent for lan registration request user
  */
 export function create(req, res) {
-	var userId = req.user._id;
-	var registration = LanRegistration.findOne({
-		'user': userId
-	});
-	return Parent.create(
-		Object.assign({'lanregistration': registration._id}, req.body))
-	.then(respondWithResult(res, 201))
-	.catch(handleError(res))
+  var userId = req.user._id;
+  var registration = LanRegistration.findOne({
+    user: userId
+  });
+  return Parent.create(
+    Object.assign({lanregistration: registration._id}, req.body))
+    .then(respondWithResult(res, 201))
+    .catch(handleError(res));
 }
 
 /**
@@ -104,8 +97,8 @@ export function create(req, res) {
  * restriction: 'admin'
  */
 export function destroyAdmin(req, res) {
-	return Parent.findById(req.params.id).exec()
-    .then(handleEntityNotFound(res))
-    .then(removeEntity(res))
-    .catch(handleError(res));
+  return Parent.findById(req.params.id).exec()
+  .then(handleEntityNotFound(res))
+  .then(removeEntity(res))
+  .catch(handleError(res));
 }
