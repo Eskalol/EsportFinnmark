@@ -4,7 +4,7 @@ import mongoose from 'mongoose';
 import {registerEvents} from './parent.events';
 
 var ParentSchema = new mongoose.Schema({
-  lanregistration: {
+  registration: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Registration',
     required: true

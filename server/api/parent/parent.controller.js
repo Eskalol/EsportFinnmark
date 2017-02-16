@@ -1,17 +1,24 @@
 /**
  * Using Rails-like standard naming convention for endpoints.
+ *
+ * Admin Access:
  * GET     /api/lan/parent              ->  index
  * POST    /api/lan/parent              ->  create
  * GET     /api/lan/parent/:id          ->  show
  * PUT     /api/lan/parent/:id          ->  upsert
  * PATCH   /api/lan/parent/:id          ->  patch
  * DELETE  /api/lan/parent/:id          ->  destroy
+ *
+ * Request user:
+ * GET     /api/lan/parent/me           ->  indexMe
+ * POST    /api/lan/parent/me           ->  createMe
  */
 
 'use strict';
 
 import jsonpatch from 'fast-json-patch';
 import Parent from './parent.model';
+import Registration from '../registration/registration.model';
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -114,4 +121,25 @@ export function destroy(req, res) {
     .then(handleEntityNotFound(res))
     .then(removeEntity(res))
     .catch(handleError(res));
+}
+
+// Creates a new Parent in the DB request user
+export function createMe(req, res) {
+  return Registration.findOne({user: req.user._id}).exec()
+    .then(function(registration) {
+      return Parent.create(Object.assign({registration: registration._id}, req.body))
+        .then(respondWithResult(res, 201))
+        .catch(handleError(res));
+    });
+}
+
+// Gets request users Parents from the DB
+export function indexMe(req, res) {
+  return Registration.findOne({user: req.user._id}).exec()
+    .then(function(registration) {
+      return Parent.find({registration: registration._id})
+        .then(handleEntityNotFound(res))
+        .then(respondWithResult(res))
+        .catch(handleError(res));
+    });
 }

@@ -17,10 +17,10 @@ var events = {
 };
 
 // Register the event emitter to the model events
-function registerEvents(Registration) {
+function registerEvents(Parent) {
   for(var e in events) {
     let event = events[e];
-    Registration.post(e, emitEvent(event));
+    Parent.post(e, emitEvent(event));
   }
 }
 

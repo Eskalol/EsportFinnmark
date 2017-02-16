@@ -10,7 +10,18 @@ var parentCtrlStub = {
   create: 'parentCtrl.create',
   upsert: 'parentCtrl.upsert',
   patch: 'parentCtrl.patch',
-  destroy: 'parentCtrl.destroy'
+  destroy: 'parentCtrl.destroy',
+  indexMe: 'parentCtrl.indexMe',
+  createMe: 'parentCtrl.createMe'
+};
+
+var authServiceStub = {
+  isAuthenticated() {
+    return 'authService.isAuthenticated';
+  },
+  hasRole(role) {
+    return `authService.hasRole.${role}`;
+  }
 };
 
 var routerStub = {
@@ -28,7 +39,8 @@ var parentIndex = proxyquire('./index.js', {
       return routerStub;
     }
   },
-  './parent.controller': parentCtrlStub
+  './parent.controller': parentCtrlStub,
+  '../../auth/auth.service': authServiceStub
 });
 
 describe('Parent API Router:', function() {
@@ -37,49 +49,65 @@ describe('Parent API Router:', function() {
   });
 
   describe('GET /api/lan/parent', function() {
-    it('should route to parent.controller.index', function() {
+    it('should verify admin role and route route to parent.controller.index', function() {
       expect(routerStub.get
-        .withArgs('/', 'parentCtrl.index')
+        .withArgs('/', 'authService.hasRole.admin', 'parentCtrl.index')
         ).to.have.been.calledOnce;
     });
   });
 
   describe('GET /api/lan/parent/:id', function() {
-    it('should route to parent.controller.show', function() {
+    it('should verify admin role and route to parent.controller.show', function() {
       expect(routerStub.get
-        .withArgs('/:id', 'parentCtrl.show')
+        .withArgs('/:id', 'authService.hasRole.admin', 'parentCtrl.show')
         ).to.have.been.calledOnce;
     });
   });
 
   describe('POST /api/lan/parent', function() {
-    it('should route to parent.controller.create', function() {
+    it('should verify admin role and route to parent.controller.create', function() {
       expect(routerStub.post
-        .withArgs('/', 'parentCtrl.create')
+        .withArgs('/', 'authService.hasRole.admin', 'parentCtrl.create')
         ).to.have.been.calledOnce;
     });
   });
 
   describe('PUT /api/lan/parent/:id', function() {
-    it('should route to parent.controller.upsert', function() {
+    it('should verify admin role and route to parent.controller.upsert', function() {
       expect(routerStub.put
-        .withArgs('/:id', 'parentCtrl.upsert')
+        .withArgs('/:id', 'authService.hasRole.admin', 'parentCtrl.upsert')
         ).to.have.been.calledOnce;
     });
   });
 
   describe('PATCH /api/lan/parent/:id', function() {
-    it('should route to parent.controller.patch', function() {
+    it('should verify admin role and route to parent.controller.patch', function() {
       expect(routerStub.patch
-        .withArgs('/:id', 'parentCtrl.patch')
+        .withArgs('/:id', 'authService.hasRole.admin', 'parentCtrl.patch')
         ).to.have.been.calledOnce;
     });
   });
 
   describe('DELETE /api/lan/parent/:id', function() {
-    it('should route to parent.controller.destroy', function() {
+    it('should verify admin role and route to parent.controller.destroy', function() {
       expect(routerStub.delete
-        .withArgs('/:id', 'parentCtrl.destroy')
+        .withArgs('/:id', 'authService.hasRole.admin', 'parentCtrl.destroy')
+        ).to.have.been.calledOnce;
+    });
+  });
+
+  describe('GET /api/lan/parent/me', function() {
+    it('should be authenticated and route to parent.controller.indexMe', function() {
+      expect(routerStub.get
+        .withArgs('/me', 'authService.isAuthenticated', 'parentCtrl.indexMe')
+        ).to.have.been.calledOnce;
+    });
+  });
+
+  describe('POST /api/lan/parent/me', function() {
+    it('should be authenticated and route to parent.controller.createMe', function() {
+      expect(routerStub.post
+        .withArgs('/me', 'authService.isAuthenticated', 'parentCtrl.createMe')
         ).to.have.been.calledOnce;
     });
   });
