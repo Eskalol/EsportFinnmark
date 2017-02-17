@@ -5,6 +5,7 @@
 var app = require('../..');
 import request from 'supertest';
 import User from '../user/user.model';
+import Event from '../event/event.model';
 
 var newRegistration;
 
@@ -12,6 +13,7 @@ describe('Registration API:', function() {
   var token;
   var user;
   var normalUser;
+  var event;
 
   describe('Admin role: ', function() {
 
@@ -34,12 +36,29 @@ describe('Registration API:', function() {
         });
 
         return normalUser.save();
+      })
+      .then(function() {
+        return Event.remove().then(function() {
+          event = new Event({
+            title: "cool event",
+            startDatetime: new Date("1990/06/17"),
+            endDatetime: new Date("1990/09/17"),
+            address: "cool street",
+            info: "awesome",
+            price: 200,
+            capacity: 50
+          });
+
+          return event.save();
+        });
       });
     });
 
     // Clear users after testing
     after(function() {
-      return User.remove();
+      return User.remove().then(function() {
+        Event.remove();
+      });
     });
 
     describe('GET /api/lan/registration', function() {
@@ -87,6 +106,7 @@ describe('Registration API:', function() {
           .post('/api/lan/registration')
           .send({
             user: normalUser._id,
+            event: event._id,
             birthdate: new Date("1990/06/17"),
             phone: "547544",
             address: "cool address",
@@ -102,6 +122,7 @@ describe('Registration API:', function() {
             }
             newRegistration = res.body;
             expect(newRegistration.user).to.equal(`${normalUser._id}`);
+            expect(newRegistration.event).to.equal(`${event._id}`);
             expect(newRegistration.birthdate).to.equal("1990-06-16T22:00:00.000Z");
             expect(newRegistration.phone).to.equal("547544");
             expect(newRegistration.address).to.equal("cool address");
@@ -116,6 +137,7 @@ describe('Registration API:', function() {
           .post('/api/lan/registration')
           .send({
             user: normalUser._id,
+            event: event._id,
             birthdate: new Date("1990/06/17"),
             phone: "547544",
             address: "cool address",
@@ -139,6 +161,7 @@ describe('Registration API:', function() {
               return done(err);
             }
             expect(res.body.user).to.equal(`${normalUser._id}`);
+            expect(newRegistration.event).to.equal(`${event._id}`);
             expect(res.body.birthdate).to.equal("1990-06-16T22:00:00.000Z");
             expect(res.body.phone).to.equal("547544");
             expect(res.body.address).to.equal("cool address");
@@ -171,6 +194,7 @@ describe('Registration API:', function() {
               return done(err);
             }
             expect(res.body.user).to.equal(`${normalUser._id}`);
+            expect(newRegistration.event).to.equal(`${event._id}`);
             expect(res.body.birthdate).to.equal("1990-06-16T22:00:00.000Z");
             expect(res.body.phone).to.equal("123456");
             expect(res.body.address).to.equal("new");
@@ -191,6 +215,7 @@ describe('Registration API:', function() {
               return done(err);
             }
             expect(res.body.user).to.equal(`${normalUser._id}`);
+            expect(newRegistration.event).to.equal(`${event._id}`);
             expect(res.body.birthdate).to.equal("1990-06-16T22:00:00.000Z");
             expect(res.body.phone).to.equal("123456");
             expect(res.body.address).to.equal("new");
@@ -227,6 +252,7 @@ describe('Registration API:', function() {
               return done(err);
             }
             expect(res.body.user).to.equal(`${normalUser._id}`);
+            expect(newRegistration.event).to.equal(`${event._id}`);
             expect(res.body.birthdate).to.equal("1990-06-16T22:00:00.000Z");
             expect(res.body.phone).to.equal("123456");
             expect(res.body.address).to.equal("new");
@@ -280,6 +306,7 @@ describe('Registration API:', function() {
   describe('User role: ', function() {
     token = null;
     user = null;
+    event = null;
 
     // Clear users before testing
     before(function() {
@@ -292,6 +319,21 @@ describe('Registration API:', function() {
         });
 
         return user.save();
+      })
+      .then(function() {
+        return Event.remove().then(function() {
+          event = new Event({
+            title: "cool event",
+            startDatetime: new Date("1990/06/17"),
+            endDatetime: new Date("1990/09/17"),
+            address: "cool street",
+            info: "awesome",
+            price: 200,
+            capacity: 50
+          });
+
+          return event.save();
+        });
       });
     });
 
@@ -320,6 +362,7 @@ describe('Registration API:', function() {
         request(app)
           .post('/api/lan/registration/me')
           .send({
+            event: event._id,
             birthdate: new Date("1992/06/17"),
             phone: "135154",
             address: "wall street",
@@ -335,6 +378,7 @@ describe('Registration API:', function() {
             }
             newRegistration = res.body;
             expect(newRegistration.user).to.equal(`${user._id}`);
+            expect(newRegistration.event).to.equal(`${event._id}`);
             expect(newRegistration.birthdate).to.equal("1992-06-16T22:00:00.000Z");
             expect(newRegistration.phone).to.equal("135154");
             expect(newRegistration.address).to.equal("wall street");
@@ -371,6 +415,7 @@ describe('Registration API:', function() {
               return done(err);
             }
             expect(newRegistration.user).to.equal(`${user._id}`);
+            expect(newRegistration.event).to.equal(`${event._id}`);
             expect(newRegistration.birthdate).to.equal("1992-06-16T22:00:00.000Z");
             expect(newRegistration.phone).to.equal("135154");
             expect(newRegistration.address).to.equal("wall street");
