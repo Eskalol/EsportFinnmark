@@ -7,7 +7,12 @@ var RegistrationSchema = new mongoose.Schema({
   user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-    unique: true
+    required: true
+  },
+  event: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Event',
+    required: true
   },
   birthdate: {
     type: Date,
@@ -30,6 +35,8 @@ var RegistrationSchema = new mongoose.Schema({
     required: true
   }
 });
+
+RegistrationSchema.index({user: 1, event: 1}, {unique: true});
 
 registerEvents(RegistrationSchema);
 export default mongoose.model('Registration', RegistrationSchema);

@@ -6,6 +6,7 @@ var app = require('../..');
 import request from 'supertest';
 import User from '../user/user.model';
 import Registration from '../registration/registration.model';
+import Event from '../event/event.model';
 
 var newParent;
 
@@ -13,6 +14,7 @@ describe('Parent API:', function() {
   var token;
   var user;
   var registration;
+  var event;
 
   describe('Admin role: ', function() {
     // Clear users before testing
@@ -26,10 +28,27 @@ describe('Parent API:', function() {
         });
 
         return user.save();
-      }).then(function() {
+      })
+      .then(function() {
+        return Event.remove().then(function() {
+          event = new Event({
+            title: "cool event",
+            startDatetime: new Date("1990/06/17"),
+            endDatetime: new Date("1990/09/17"),
+            address: "cool street",
+            info: "awesome",
+            price: 200,
+            capacity: 50
+          });
+
+          return event.save();
+        });
+      })
+      .then(function() {
         return Registration.remove().then(function() {
           registration = new Registration({
             user: user._id,
+            event: event._id,
             birthdate: new Date("1990/06/17"),
             phone: "12345678",
             address: "asd",
@@ -46,6 +65,8 @@ describe('Parent API:', function() {
     after(function() {
       return User.remove().then(function() {
         return Registration.remove();
+      }).then(function() {
+        return Event.remove();
       });
     });
 
@@ -300,10 +321,27 @@ describe('Parent API:', function() {
         });
 
         return user.save();
-      }).then(function() {
+      })
+      .then(function() {
+        return Event.remove().then(function() {
+          event = new Event({
+            title: "cool event",
+            startDatetime: new Date("1990/06/17"),
+            endDatetime: new Date("1990/09/17"),
+            address: "cool street",
+            info: "awesome",
+            price: 200,
+            capacity: 50
+          });
+
+          return event.save();
+        });
+      })
+      .then(function() {
         return Registration.remove().then(function() {
           registration = new Registration({
             user: user._id,
+            event: event._id,
             birthdate: new Date("1990/06/17"),
             phone: "12345678",
             address: "asd",
@@ -320,6 +358,8 @@ describe('Parent API:', function() {
     after(function() {
       return User.remove().then(function() {
         return Registration.remove();
+      }).then(function () {
+        return Event.remove();
       });
     });
 
