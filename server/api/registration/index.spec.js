@@ -49,7 +49,7 @@ describe('Registration API Router:', function() {
   });
 
   describe('GET /api/lan/registration', function() {
-    it('should verify admin role and route route to registration.controller.index', function() {
+    it('should verify admin role and route to registration.controller.index', function() {
       expect(routerStub.get
         .withArgs('/', 'authService.hasRole.admin', 'registrationCtrl.index')
         ).to.have.been.calledOnce;
@@ -57,7 +57,7 @@ describe('Registration API Router:', function() {
   });
 
   describe('GET /api/lan/registration/:id', function() {
-    it('should verify admin role and route route to registration.controller.show', function() {
+    it('should verify admin role and route to registration.controller.show', function() {
       expect(routerStub.get
         .withArgs('/:id', 'authService.hasRole.admin', 'registrationCtrl.show')
         ).to.have.been.calledOnce;
@@ -65,7 +65,7 @@ describe('Registration API Router:', function() {
   });
 
   describe('POST /api/lan/registration', function() {
-    it('should verify admin role and route route to registration.controller.create', function() {
+    it('should verify admin role and route to registration.controller.create', function() {
       expect(routerStub.post
         .withArgs('/', 'authService.hasRole.admin', 'registrationCtrl.create')
         ).to.have.been.calledOnce;
@@ -73,7 +73,7 @@ describe('Registration API Router:', function() {
   });
 
   describe('PUT /api/lan/registration/:id', function() {
-    it('should verify admin role and route route to registration.controller.upsert', function() {
+    it('should verify admin role and route to registration.controller.upsert', function() {
       expect(routerStub.put
         .withArgs('/:id', 'authService.hasRole.admin', 'registrationCtrl.upsert')
         ).to.have.been.calledOnce;
@@ -81,7 +81,7 @@ describe('Registration API Router:', function() {
   });
 
   describe('PATCH /api/lan/registration/:id', function() {
-    it('should verify admin role and route route to registration.controller.patch', function() {
+    it('should verify admin role and route to registration.controller.patch', function() {
       expect(routerStub.patch
         .withArgs('/:id', 'authService.hasRole.admin', 'registrationCtrl.patch')
         ).to.have.been.calledOnce;
@@ -89,7 +89,7 @@ describe('Registration API Router:', function() {
   });
 
   describe('DELETE /api/lan/registration/:id', function() {
-    it('should verify admin role and route route to registration.controller.destroy', function() {
+    it('should verify admin role and route to registration.controller.destroy', function() {
       expect(routerStub.delete
         .withArgs('/:id', 'authService.hasRole.admin', 'registrationCtrl.destroy')
         ).to.have.been.calledOnce;
