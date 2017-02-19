@@ -14,23 +14,21 @@
         <li ng-repeat="item in $ctrl.menu" ng-class="{active: $ctrl.isActive(item.link)}">
             <a ng-href="{{item.link}}">{{item.title}}</a>
         </li>
-
       </ul>
-
       <ul class="nav navbar-nav navbar-right">
         <li ng-hide="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/signup')}"><a href="/signup">Sign up</a></li>
         <li ng-hide="$ctrl.isLoggedIn()" ng-class="{active: $ctrl.isActive('/login')}"><a href="/login">Login</a></li>
         <li class="dropdown" ng-show="$ctrl.isLoggedIn()">
           <span uib-dropdown>
             <a href class="navbar-text dropdown-toggle" id="user-dropdown" uib-dropdown-toggle>
-              {{ $ctrl.getCurrentUser().name }}   <span class="glyphicon glyphicon-user pull-right"></span>
+              <i class="fa fa-user fa-fw"></i> <i class="fa fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu" uib-dropdown-menu aria-labelledby="user-dropdown">
               <li class="dropdown-header">Hello! {{ $ctrl.getCurrentUser().name }}</li>
               <li ng-show="$ctrl.isAdmin()" ng-class="{active: $ctrl.isActive('/admin')}"><a href="/admin">Admin</a></li>
               <li class="divider"></li>
               <li class="dropdown-header">Account</li>
-              <li>
+              <li ng-class="{active: $ctrl.isActive('/settings')}">
                 <a href="/settings">
                   <span class="glyphicon glyphicon-cog" data-toggle="dropdown"></span> Settings
                 </a>

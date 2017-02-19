@@ -5,6 +5,7 @@
         padding-left: 0;
         padding-right: 0;
     }
+    height: 94.5%;
 }
 
 .sidebar .sidebar-search {
@@ -18,18 +19,18 @@
             background-color: rgb(215, 215, 215);
         }
     }
-}
-
-.sidebar .arrow {
-    float: right;
-}
-
-.sidebar .fa.arrow:before {
-    content: "\f104";
-}
-
-.sidebar .active > a > .fa.arrow:before {
-    content: "\f107";
+    div {
+        background-color: inherit;
+        color: inherit;
+        border-bottom: 0;
+        margin-bottom: -8px;
+        margin-top: -9px;
+    }
+    span {
+        margin-bottom: 5px;
+        background-color: inherit;
+        color: inherit;
+    }
 }
 
 .sidebar .nav-second-level li,
