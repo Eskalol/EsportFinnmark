@@ -1,54 +1,78 @@
 <sidebar></sidebar>
-<div class="col-lg-2 col-md-4 col-sm-4 col-xs-1"></div>
+<div class="row">
+  <div class="col-lg-2 col-md-3 col-sm-3 col-xs-1"></div>
+  <div class="col-lg-8 col-md-8 com-sm-8 col-xs-10 container-fluid">
+    <h1 class="page-header">User management</h1>
+  </div>
+  <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+<div class="row">
 
-<div class="col-lg-8 col-md-8 com-sm-8 col-xs-11 container">
-  <div class="panel panel-default">
-    <div class="panel-heading">
-      Users
+  <div class="col-lg-2 col-md-3 col-sm-3 col-xs-1"></div>
+
+  <div class="col-lg-8 col-md-8 com-sm-8 col-xs-10 container-fluid">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Users
+      </div>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-search"></i></div>
+              <input type="text" class="form-control" placeholder="Search..." ng-model="usersCtrl.table.search">
+            </div>
+          </tr>
+          <tr>
+            <td>
+              <a href="#" ng-click="usersCtrl.table.sortType = 'name'; usersCtrl.table.sortReverse = !usersCtrl.table.sortReverse">
+                Name
+                <span ng-show="usersCtrl.table.sortType == 'name' && !usersCtrl.table.sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="usersCtrl.table.sortType == 'name' && usersCtrl.table.sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+              <a href="#" ng-click="usersCtrl.table.sortType = 'email'; usersCtrl.table.sortReverse = !usersCtrl.table.sortReverse">
+                Email
+                <span ng-show="usersCtrl.table.sortType == 'email' && !usersCtrl.table.sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="usersCtrl.table.sortType == 'email' && usersCtrl.table.sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+              <a href="#" ng-click="usersCtrl.table.sortType = 'role'; usersCtrl.table.sortReverse = !usersCtrl.table.sortReverse">
+                Role
+                <span ng-show="usersCtrl.table.sortType == 'role' && !usersCtrl.table.sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="usersCtrl.table.sortType == 'role' && usersCtrl.table.sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+              <a href="#" ng-click="usersCtrl.table.sortType = 'dateJoined'; usersCtrl.table.sortReverse = !usersCtrl.table.sortReverse">
+                Date joined
+                <span ng-show="usersCtrl.table.sortType == 'dateJoined' && !usersCtrl.table.sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="usersCtrl.table.sortType == 'dateJoined' && usersCtrl.table.sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="user in usersCtrl.users | orderBy:usersCtrl.table.sortType:usersCtrl.table.sortReverse | filter:usersCtrl.table.search">
+            <td>{{user.name}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.role}}</td>
+            <td>{{user.dateJoined | date: 'dd.MM.yyyy'}}</td>
+            <td><a ng-click="usersCtrl.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <table ng-table="usersCtrl.tableParams" show-filter="true" class="table table-condensed table-bordered table-striped">
-      <tr ng-repeat="user in usersCtrl.users_collection">
-        <td data-title="'Name'" sortable="'name'" filter="{name: 'text'}">{{user.name}}</td>
-        <td data-title="'Email'" sortable="'email'" filter="{email: 'text'}">{{user.email}}</td>
-        <td data-title="'Role'">{{user.role}}</td>
-      </tr>
-    </table>
-<!--     <table st-table="usersCtrl.users_collection" class="table table-striped">
-      <thead>
-        <tr>
-          <th st-sort="name">Name</th>
-          <th st-sort="email">Email</th>
-          <th st-sort="role">Role</th>
-        </tr>
-        <tr>
-          <th>
-            <input type="search" st-search="'name'" placeholder="Name search..." class="input-sm form-control">
-          </th>
-          <th>
-            <input type="search" st-search="'email'" placeholder="Email search..." class="input-sm form-control">
-          </th>
-          <th></th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="user in usersCtrl.users_collection">
-          <td>{{user.name}}</td>
-          <td>{{user.email}}</td>
-          <td>{{user.role}}</td>
-        </tr>
-      </tbody>
-      <tfoot>
-        <tr>
-          <td colspan="5" class="text-center">
-            <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7"></div>
-          </td>
-        </tr>
-      </tfoot>
-    </table> -->
+
   </div>
 
-</div>
+  <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1">
 
-<div class="lg-2">
+  </div>
 
 </div>

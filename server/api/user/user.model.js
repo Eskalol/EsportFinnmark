@@ -24,6 +24,10 @@ var UserSchema = new Schema({
     type: String,
     default: 'user'
   },
+  dateJoined: {
+    type: Date,
+    default: Date.now
+  },
   password: {
     type: String,
     required() {
