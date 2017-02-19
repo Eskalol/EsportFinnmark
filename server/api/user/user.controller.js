@@ -100,6 +100,7 @@ export function destroy(req, res) {
  * restriction: 'admin'
  */
 export function upsert(req, res) {
+  console.log("WOHOOO");
   if(req.body._id) {
     delete req.body._id;
   }

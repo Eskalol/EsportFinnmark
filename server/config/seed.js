@@ -57,32 +57,27 @@ export default function seedDatabaseIfNeeded() {
           name: 'Admin',
           email: 'admin@example.com',
           password: 'admin'
-        },
-        {
+        }, {
           provider: 'local',
           name: 'Joacim Jacobsen',
           email: 'jokke@example.com',
           password: 'test'
-        },
-        {
+        }, {
           provider: 'local',
           name: 'Patrick',
           email: 'pondus@example.com',
           password: 'test'
-        },
-        {
+        }, {
           provider: 'local',
           name: 'Beate',
           email: 'beate@example.com',
           password: 'test'
-        },
-        {
+        }, {
           provider: 'local',
           name: 'Kevin',
           email: 'paasan@example.com',
           password: 'test'
-        }
-        )
+        })
         .then(() => console.log('finished populating users'))
         .catch(err => console.log('error populating users', err));
       });

@@ -18,7 +18,8 @@ export class UsersComponent {
   userRoles = ['user', 'admin'];
 
   /*@ngInject*/
-  constructor(User) {
+  constructor($http, User) {
+    this.$http = $http;
     this.usersList = User.query();
 
     console.log(this.usersList);
@@ -30,7 +31,10 @@ export class UsersComponent {
   }
 
   updateUserRole(user) {
-    user.$save();
+    this.$http.put(`/api/users/${user._id}`, {
+      role: user.role
+    });
+    this.userAction.editId = '';
   }
 
 }
