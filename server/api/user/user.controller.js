@@ -4,6 +4,26 @@ import User from './user.model';
 import config from '../../config/environment';
 import jwt from 'jsonwebtoken';
 
+function respondWithResult(res, statusCode) {
+  statusCode = statusCode || 200;
+  return function(entity) {
+    if(entity) {
+      return res.status(statusCode).json(entity);
+    }
+    return null;
+  };
+}
+
+function handleEntityNotFound(res) {
+  return function(entity) {
+    if(!entity) {
+      res.status(404).end();
+      return null;
+    }
+    return entity;
+  };
+}
+
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
   return function(err) {
@@ -73,6 +93,53 @@ export function destroy(req, res) {
       res.status(204).end();
     })
     .catch(handleError(res));
+}
+
+/**
+ * Updates a user
+ * restriction: 'admin'
+ */
+export function upsert(req, res) {
+  if(req.body._id) {
+    delete req.body._id;
+  }
+  if(req.body.name) {
+    delete req.body.name;
+  }
+  if(req.body.password) {
+    delete req.body.password;
+  }
+  if(req.body.dateJoined) {
+    delete req.body.dateJoined;
+  }
+  if(req.body.provider) {
+    delete req.body.provider;
+  }
+  if(req.body.salt) {
+    delete req.body.salt;
+  }
+  if(req.body.facebook) {
+    delete req.body.facebook;
+  }
+  if(req.body.google) {
+    delete req.body.google;
+  }
+  if(req.body.github) {
+    delete req.body.github;
+  }
+
+  return User.findOneAndUpdate({
+    _id: req.params.id
+  },
+  req.body,
+  {
+    new: true,
+    upsert: true,
+    setDefaultsOnInsert: true,
+    runValidators: true
+  }).select('-salt -password').exec()
+  .then(respondWithResult(res))
+  .catch(handleError(res));
 }
 
 /**

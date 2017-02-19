@@ -15,7 +15,7 @@
       <div class="panel-heading">
         Users
       </div>
-      <table class="table table-bordered table-striped">
+      <table class="table table-bordered table-hover table-striped users-list">
         <thead>
           <tr>
             <div class="input-group">
@@ -58,12 +58,28 @@
           </tr>
         </thead>
         <tbody>
-          <tr ng-repeat="user in usersCtrl.users | orderBy:usersCtrl.table.sortType:usersCtrl.table.sortReverse | filter:usersCtrl.table.search">
+          <tr ng-repeat="user in usersCtrl.usersList | orderBy:usersCtrl.table.sortType:usersCtrl.table.sortReverse | filter:usersCtrl.table.search">
             <td>{{user.name}}</td>
             <td>{{user.email}}</td>
-            <td>{{user.role}}</td>
+            <td>
+              <span ng-show="usersCtrl.userAction.editId != user._id">
+                {{user.role}}
+              </span>
+              <select ng-show="usersCtrl.userAction.editId == user._id" name="" id="" class="form-control" ng-options="role as role for role in usersCtrl.userRoles" ng-model="user.role">
+              </select>
+
+            </td>
             <td>{{user.dateJoined | date: 'dd.MM.yyyy'}}</td>
-            <td><a ng-click="usersCtrl.delete(user)" class="trash"><span class="fa fa-trash fa-2x"></span></a></td>
+            <td>
+              <a ng-click="usersCtrl.delete(user)" class="trash"><i class="fa fa-trash fa-2x"></i>
+              </a>
+              <a ng-hide="usersCtrl.userAction.editId == user._id" ng-click="usersCtrl.userAction.editId = user._id" class="edit">
+                <i class="fa fa-pencil-square-o fa-2x"></i>
+              </a>
+              <a ng-hide="usersCtrl.userAction.editId != user._id" ng-click="usersCtrl.updateUserRole(user)" class="save">
+                <i class="fa fa-check fa-2x"></i>
+              </a>
+            </td>
           </tr>
         </tbody>
       </table>

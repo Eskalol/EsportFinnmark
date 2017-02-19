@@ -1,0 +1,28 @@
+.users-list {
+  td {
+    .trash {
+      text-decoration: none;
+      cursor: default;
+      color: $brand-danger;
+      &:hover {
+        color: darken($brand-danger, 10);
+      }
+    }
+    .edit {
+      text-decoration: none;
+      cursor: default;
+      color: $gray-light;
+      &:hover {
+        color: darken($gray-light, 10);
+      }
+    }
+    .save {
+      text-decoration: none;
+      cursor: default;
+      color: $brand-success;
+      &:hover {
+        color: darken($brand-success, 10);
+      }
+    }
+  }
+}
