@@ -6,31 +6,31 @@ export class sidebarComponent {
   menu = [
     {
       title: 'Dashboard',
-      link: '/',
+      link: '/admin',
       icon: 'fa fa-dashboard fa-fw',
       multi: false,
     },
     {
       title: 'Users',
-      link: '/users',
+      link: '/admin/users',
       icon: 'fa fa-users fa-fw',
       multi: false,
     },
     {
       title: 'Event',
-      link: '/event',
+      link: '/admin/event',
       icon: 'fa fa-gamepad fa-fw',
       multi: true,
       isOpen: false,
       sub: [
         {
           title: 'Registration',
-          link: '/event/registration',
+          link: '/admin/event/registration',
           icon: 'fa fa-address-card-o',
         }
       ]
     }
-  ]
+  ];
 
   constructor($location, Auth) {
     'ngInject';

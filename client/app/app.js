@@ -5,6 +5,7 @@ import angular from 'angular';
 import ngCookies from 'angular-cookies';
 import ngResource from 'angular-resource';
 import ngSanitize from 'angular-sanitize';
+import {ngTableModule} from 'ng-table';
 
 const ngRoute = require('angular-route');
 
@@ -26,11 +27,13 @@ import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
+import UsersComponent from './admin/users/users.component';
 
 import './app.scss';
 
+
 angular.module('fesApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, _Auth, account,
-  admin, lan, navbar, footer, main, constants, util
+  admin, lan, UsersComponent, navbar, footer, main, constants, util, ngTableModule.name
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
