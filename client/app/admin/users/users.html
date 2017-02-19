@@ -74,7 +74,7 @@
               <a ng-click="usersCtrl.delete(user)" class="trash"><i class="fa fa-trash fa-2x"></i>
               </a>
               <a ng-hide="usersCtrl.userAction.editId == user._id" ng-click="usersCtrl.userAction.editId = user._id" class="edit">
-                <i class="fa fa-pencil-square-o fa-2x"></i>
+                <i class="fa fa-pencil-square-o fa-2x" class="edit"></i>
               </a>
               <a ng-hide="usersCtrl.userAction.editId != user._id" ng-click="usersCtrl.updateUserRole(user)" class="save">
                 <i class="fa fa-check fa-2x"></i>

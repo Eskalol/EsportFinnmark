@@ -7,6 +7,7 @@
 import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
 import config from './environment/';
+import Event from '../api/event/event.model';
 
 export default function seedDatabaseIfNeeded() {
   if(config.seedDB) {
@@ -81,5 +82,44 @@ export default function seedDatabaseIfNeeded() {
         .then(() => console.log('finished populating users'))
         .catch(err => console.log('error populating users', err));
       });
+
+      Event.find({}).remove()
+        .then(() => {
+          Event.create({
+            title: "Lan party 1",
+            startDatetime: new Date("2016/02/23"),
+            endDatetime: new Date("2016/02/25"),
+            address: "Karasjok",
+            info: "Lan og mye morro!",
+            price: 200,
+            capacity: 100
+          }, {
+            title: "Lan party 2",
+            startDatetime: new Date("2016/08/10"),
+            endDatetime: new Date("2016/08/15"),
+            address: "Karasjok",
+            info: "Sommerlan",
+            price: 400,
+            capacity: 150
+          }, {
+            title: "Finnmark Gathering",
+            startDatetime: new Date("2016/10/1"),
+            endDatetime: new Date("2016/10/5"),
+            address: "Alta",
+            info: "ultra bra lan",
+            price: 500,
+            capacity: 500
+          }, {
+            title: "Minilan",
+            startDatetime: new Date("2017/02/23"),
+            endDatetime: new Date("2017/02/25"),
+            address: "Alta",
+            info: "Lan paa huset!",
+            price: 200,
+            capacity: 50
+          })
+          .then(() => console.log('finished populating events'))
+          .catch(err => console.log('error populating events', err));
+        });
   }
 }

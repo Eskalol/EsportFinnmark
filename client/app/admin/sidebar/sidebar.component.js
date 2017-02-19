@@ -19,10 +19,15 @@ export class sidebarComponent {
     {
       title: 'Event',
       link: '/admin/event',
-      icon: 'fa fa-gamepad fa-fw',
+      icon: 'fa fa-bullhorn fa-fw',
       multi: true,
       isOpen: false,
       sub: [
+        {
+          title: 'Event',
+          link: '/admin/event',
+          icon: 'fa fa-gamepad fa-fw',
+        },
         {
           title: 'Registration',
           link: '/admin/event/registration',

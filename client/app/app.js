@@ -26,13 +26,11 @@ import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
-import UsersComponent from './admin/users/users.component';
-
 import './app.scss';
 
 
 angular.module('fesApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, _Auth, account,
-  admin, lan, UsersComponent, navbar, footer, main, constants, util, ngMessages
+  admin, lan, navbar, footer, main, constants, util, ngMessages
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {
