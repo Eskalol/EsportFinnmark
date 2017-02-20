@@ -14,16 +14,6 @@ function respondWithResult(res, statusCode) {
   };
 }
 
-function handleEntityNotFound(res) {
-  return function(entity) {
-    if(!entity) {
-      res.status(404).end();
-      return null;
-    }
-    return entity;
-  };
-}
-
 function validationError(res, statusCode) {
   statusCode = statusCode || 422;
   return function(err) {
@@ -100,7 +90,6 @@ export function destroy(req, res) {
  * restriction: 'admin'
  */
 export function upsert(req, res) {
-  console.log("WOHOOO");
   if(req.body._id) {
     delete req.body._id;
   }
@@ -133,14 +122,15 @@ export function upsert(req, res) {
     _id: req.params.id
   },
   req.body,
-  {
-    new: true,
-    upsert: true,
-    setDefaultsOnInsert: true,
-    runValidators: true
-  }).select('-salt -password').exec()
-  .then(respondWithResult(res))
-  .catch(handleError(res));
+    {
+      new: true,
+      upsert: true,
+      setDefaultsOnInsert: true,
+      runValidators: true
+    }).select('-salt -password')
+    .exec()
+    .then(respondWithResult(res))
+    .catch(handleError(res));
 }
 
 /**

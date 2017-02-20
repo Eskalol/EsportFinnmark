@@ -1,21 +1,21 @@
 'use strict';
 
-export function registrationService() {
+export function registrationService($resource) {
   'ngInject';
 
   return $resource('/api/lan/registration/:id/:controller', {
     id: '@_id'
-    }, {
-      get: {
-        method: 'GET'
+  }, {
+    get: {
+      method: 'GET'
+    },
+    query: {
+      method: 'GET',
+      params: {
+        id: ''
       },
-      query: {
-        method: 'GET',
-        params: {
-          id: ''
-        },
-        isArray: true
-      }
-    });
+      isArray: true
+    }
+  });
 }
 
