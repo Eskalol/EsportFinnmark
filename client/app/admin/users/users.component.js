@@ -18,17 +18,14 @@ export class UsersComponent {
   userRoles = ['user', 'admin'];
 
   /*@ngInject*/
-  constructor($http, User) {
+  constructor($http, User, Modal) {
     'ngInject';
     this.$http = $http;
     this.usersList = User.query();
-
-    console.log(this.usersList);
-  }
-
-  delete(user) {
-    user.$remove();
-    this.usersList.splice(this.usersList.indexOf(user), 1);
+    this.delete = Modal.confirm.delete(user => {
+      user.$remove();
+      this.usersList.splice(this.usersList.indexOf(user), 1);
+    });
   }
 
   updateUserRole(user) {
