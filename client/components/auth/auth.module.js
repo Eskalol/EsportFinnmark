@@ -16,7 +16,7 @@ import {
 import {
   UserResource
 } from './user.service';
-const ngRoute = require('angular-route');
+import ngRoute from 'angular-route';
 
 function addInterceptor($httpProvider) {
   'ngInject';

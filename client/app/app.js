@@ -9,7 +9,7 @@ import ngSanitize from 'angular-sanitize';
 const ngRoute = require('angular-route');
 
 import uiBootstrap from 'angular-ui-bootstrap';
-import ngMessages from 'angular-messages';
+// import ngMessages from 'angular-messages';
 // import ngValidationMatch from 'angular-validation-match';
 
 
@@ -26,11 +26,13 @@ import footer from '../components/footer/footer.component';
 import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
+import Services from '../services/services.module';
+
 import './app.scss';
 
 
 angular.module('fesApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, _Auth, account,
-  admin, lan, navbar, footer, main, constants, util, ngMessages
+  admin, lan, navbar, footer, main, constants, util, Services
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

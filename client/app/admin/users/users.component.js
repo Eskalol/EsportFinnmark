@@ -9,16 +9,17 @@ export class UsersComponent {
     sortType: '',
     sortReverse: false,
     search: '',
-  }
+  };
 
   userAction = {
     editId: ''
-  }
+  };
 
   userRoles = ['user', 'admin'];
 
   /*@ngInject*/
   constructor($http, User) {
+    'ngInject';
     this.$http = $http;
     this.usersList = User.query();
 
