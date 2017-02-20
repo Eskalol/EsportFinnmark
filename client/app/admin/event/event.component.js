@@ -21,7 +21,7 @@ export class EventComponent {
     this.delete = Modal.confirm.delete(event => {
       event.$remove();
       this.eventsList.splice(this.eventsList.indexOf(event), 1);
-    })
+    });
   }
 }
 
