@@ -6,9 +6,49 @@ const ngRoute = require('angular-route');
 import routes from './newEvent.routes';
 
 export class NewEventComponent {
-  /*@ngInject*/
+
+  formData = {
+    title: '',
+    startDate: '',
+    endDate: '',
+    startTime: '',
+    endTime: '',
+    address: '',
+    info: '',
+    price: '',
+    capacity: ''
+  };
+
+  datepicker1 = {
+    open: false
+  };
+
+  datepicker2 = {
+    open: false
+  };
+
+  dateFormat = 'dd.MM.yyyy';
+
+  dateOptions = {
+    startingDay: 1
+  };
+
+  timeOptions = {
+    hstep: 1,
+    mstep: 15
+  };
+
   constructor() {
+    'ngInject';
     this.message = 'Hello';
+  }
+
+  open1() {
+    this.datepicker1.open = true;
+  }
+
+  open2() {
+    this.datepicker2.open = true;
   }
 }
 
