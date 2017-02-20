@@ -14,15 +14,14 @@ export class EventComponent {
   };
 
   /*@ngInject*/
-  constructor(Event) {
+  constructor(Event, Modal) {
     'ngInject';
     this.eventsList = Event.query();
     console.log(this.eventsList);
-  }
-
-  delete(event) {
-    event.$remove();
-    this.eventsList.splice(this.eventsList.indexOf(event), 1);
+    this.delete = Modal.confirm.delete(event => {
+      event.$remove();
+      this.eventsList.splice(this.eventsList.indexOf(event), 1);
+    })
   }
 }
 

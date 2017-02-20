@@ -27,12 +27,12 @@ import main from './main/main.component';
 import constants from './app.constants';
 import util from '../components/util/util.module';
 import Services from '../services/services.module';
-
+import Modal from '../components/modal/modal.service';
 import './app.scss';
 
 
 angular.module('fesApp', [ngCookies, ngResource, ngSanitize, ngRoute, uiBootstrap, _Auth, account,
-  admin, lan, navbar, footer, main, constants, util, Services
+  admin, lan, navbar, footer, main, constants, util, Services, Modal
 ])
   .config(routeConfig)
   .run(function($rootScope, $location, Auth) {

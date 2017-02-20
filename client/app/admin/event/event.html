@@ -67,7 +67,6 @@
               </a>
             </td>
             <td>
-
             </td>
           </tr>
         </thead>
@@ -80,7 +79,7 @@
             <td>{{event.price}}</td>
             <td>{{event.capacity}}</td>
             <td>
-              <a ng-click="eventCtrl.delete(event)" class="trash"><i class="fa fa-trash fa-2x"></i>
+              <a ng-click="eventCtrl.delete(event.title, event)" class="trash"><i class="fa fa-trash fa-2x"></i>
               </a>
             </td>
           </tr>

@@ -3,6 +3,7 @@
 import angular from 'angular';
 
 export function Modal($rootScope, $uibModal) {
+  'ngInject';
   /**
    * Opens a modal
    * @param  {Object} scope      - an object to be merged with modal's scope
