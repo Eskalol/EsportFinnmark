@@ -1,1 +1,97 @@
 <sidebar></sidebar>
+<div class="row">
+  <div class="col-lg-2 col-md-3 col-sm-3 col-xs-1"></div>
+  <div class="col-lg-8 col-md-8 com-sm-8 col-xs-10 container-fluid">
+    <h1 class="page-header">Event management</h1>
+  </div>
+  <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
+</div>
+<div class="row">
+
+  <div class="col-lg-2 col-md-3 col-sm-3 col-xs-1"></div>
+
+  <div class="col-lg-8 col-md-8 com-sm-8 col-xs-10 container-fluid">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Events
+      </div>
+      <table class="table table-bordered table-hover table-striped events-list">
+        <thead>
+          <tr>
+            <div class="input-group">
+              <div class="input-group-addon"><i class="fa fa-search"></i></div>
+              <input type="text" class="form-control" placeholder="Search..." ng-model="eventCtrl.table.search">
+            </div>
+          </tr>
+          <tr>
+            <td>
+              <a href="#" ng-click="eventCtrl.table.sortType = 'title'; eventCtrl.table.sortReverse = !eventCtrl.table.sortReverse">
+                Title
+                <span ng-show="eventCtrl.table.sortType == 'title' && !eventCtrl.table.sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="eventCtrl.table.sortType == 'title' && eventCtrl.table.sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+              <a href="#" ng-click="eventCtrl.table.sortType = 'startDatetime'; eventCtrl.table.sortReverse = !eventCtrl.table.sortReverse">
+                Starting
+                <span ng-show="eventCtrl.table.sortType == 'startDatetime' && !eventCtrl.table.sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="eventCtrl.table.sortType == 'startDatetime' && eventCtrl.table.sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+              <a href="#" ng-click="eventCtrl.table.sortType = 'endDatetime'; eventCtrl.table.sortReverse = !eventCtrl.table.sortReverse">
+                Ending
+                <span ng-show="eventCtrl.table.sortType == 'endDatetime' && !eventCtrl.table.sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="eventCtrl.table.sortType == 'endDatetime' && eventCtrl.table.sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+              <a href="#" ng-click="eventCtrl.table.sortType = 'address'; eventCtrl.table.sortReverse = !eventCtrl.table.sortReverse">
+                Place
+                <span ng-show="eventCtrl.table.sortType == 'address' && !eventCtrl.table.sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="eventCtrl.table.sortType == 'address' && eventCtrl.table.sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+              <a href="#" ng-click="eventCtrl.table.sortType = 'price'; eventCtrl.table.sortReverse = !eventCtrl.table.sortReverse">
+                Price
+                <span ng-show="eventCtrl.table.sortType == 'price' && !eventCtrl.table.sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="eventCtrl.table.sortType == 'price' && eventCtrl.table.sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+              <a href="#" ng-click="eventCtrl.table.sortType = 'capacity'; eventCtrl.table.sortReverse = !eventCtrl.table.sortReverse">
+                Capacity
+                <span ng-show="eventCtrl.table.sortType == 'capacity' && !eventCtrl.table.sortReverse" class="fa fa-caret-down"></span>
+                <span ng-show="eventCtrl.table.sortType == 'capacity' && eventCtrl.table.sortReverse" class="fa fa-caret-up"></span>
+              </a>
+            </td>
+            <td>
+
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="event in eventCtrl.eventsList | orderBy:eventCtrl.table.sortType:eventCtrl.table.sortReverse | filter:eventCtrl.table.search">
+            <td>{{event.title}}</td>
+            <td>{{event.startDatetime | date: 'dd.MM.yyyy - HH:mm'}}</td>
+            <td>{{event.endDatetime | date: 'dd.MM.yyyy - HH:mm'}}</td>
+            <td>{{event.address}}</td>
+            <td>{{event.price}}</td>
+            <td>{{event.capacity}}</td>
+            <td>
+              <a ng-click="eventCtrl.delete(event)" class="trash"><i class="fa fa-trash fa-2x"></i>
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1">
+
+  </div>
+
+</div>

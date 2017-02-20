@@ -8,14 +8,21 @@ import routes from './event.routes';
 
 export class EventComponent {
   table = {
-
+    sortType: '',
+    sortReverse: false,
+    search: '',
   };
 
   /*@ngInject*/
   constructor(Event) {
     'ngInject';
-    this.eventList = Event.query();
-    console.log(this.eventList);
+    this.eventsList = Event.query();
+    console.log(this.eventsList);
+  }
+
+  delete(event) {
+    event.$remove();
+    this.eventsList.splice(this.eventsList.indexOf(event), 1);
   }
 }
 
