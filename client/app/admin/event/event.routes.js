@@ -5,7 +5,6 @@ export default function($routeProvider) {
   $routeProvider
     .when('/admin/event', {
       template: '<event></event>',
-      controllerAs: 'eventCtrl',
       authenticate: 'admin'
     });
 }
