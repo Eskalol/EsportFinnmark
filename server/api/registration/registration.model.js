@@ -33,6 +33,10 @@ var RegistrationSchema = new mongoose.Schema({
   returningHome: {
     type: Date,
     required: true
+  },
+  paid: {
+    type: Boolean,
+    default: false
   }
 });
 

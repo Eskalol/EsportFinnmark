@@ -31,6 +31,13 @@ var EventSchema = new mongoose.Schema({
   capacity: {
     type: Number,
     required: true
+  },
+  contactPerson: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'User'
+  },
+  RegistrationDeadline: {
+    type: Date
   }
 });
 
