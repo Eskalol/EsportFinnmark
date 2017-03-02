@@ -2,7 +2,6 @@
 
 import angular from 'angular';
 import ngRoute from 'angular-route';
-// import Event from '../../../services/event/event.module';
 
 import routes from './event.routes';
 
@@ -17,7 +16,6 @@ export class EventComponent {
   constructor(Event, Modal) {
     'ngInject';
     this.eventsList = Event.query();
-    console.log(this.eventsList);
     this.delete = Modal.confirm.delete(event => {
       event.$remove();
       this.eventsList.splice(this.eventsList.indexOf(event), 1);

@@ -6,6 +6,5 @@ export default function($routeProvider) {
     .when('/admin/newEvent', {
       template: '<new-event></new-event>',
       controllerAs: 'eventCtrl',
-
     });
 }
