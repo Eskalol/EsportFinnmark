@@ -9,8 +9,8 @@ export class NewEventComponent {
 
   formData = {
     title: '',
-    startDate: '',
-    endDate: '',
+    startDatetime: '',
+    endDatetime: '',
     startTime: '',
     endTime: '',
     address: '',
@@ -38,9 +38,21 @@ export class NewEventComponent {
     mstep: 15
   };
 
-  constructor() {
+  constructor(Event, $location) {
     'ngInject';
-    this.message = 'Hello';
+    // this.message = 'Hello';
+    this.Event = Event;
+    this.$location = $location;
+  }
+
+  craftDatetime(date, time) {
+    var timeString = time.getHours() + ':' + time.getMinutes() + ':00';
+
+    var year = date.getFullYear();
+    var month = date.getMonth() + 1; // Jan is 0, dec is 11
+    var day = date.getDate();
+    var dateString = '' + year + '-' + month + '-' + day;
+    return new Date(dateString + ' ' + timeString);
   }
 
   open1() {
@@ -49,6 +61,19 @@ export class NewEventComponent {
 
   open2() {
     this.datepicker2.open = true;
+  }
+
+  submit(form) {
+    this.formData.startDatetime = this.craftDatetime(this.formData.startDatetime, this.formData.startTime);
+    this.formData.endDatetime = this.craftDatetime(this.formData.endDatetime, this.formData.endTime);
+    delete this.formData.startTime;
+    delete this.formData.endTime;
+    var event = new this.Event(this.formData);
+    event.$save().then(res => {
+      this.$location.path('/admin/event');
+    }).catch(err => {
+      console.log(err);
+    });
   }
 }
 

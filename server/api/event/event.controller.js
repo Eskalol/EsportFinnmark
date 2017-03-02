@@ -80,6 +80,7 @@ export function show(req, res) {
 
 // Creates a new Event in the DB
 export function create(req, res) {
+  console.log(req.body);
   return Event.create(req.body)
     .then(respondWithResult(res, 201))
     .catch(handleError(res));
