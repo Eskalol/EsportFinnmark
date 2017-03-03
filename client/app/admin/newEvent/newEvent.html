@@ -24,38 +24,38 @@
             <input type="text" aria-describedby="addressHelp" ng-model="newEventCtrl.formData.address" placeholder="Enter address..." class="form-control" id="addressInput" ng-required="true">
             <small id="addressHelp" class="form-text text-muted">Address where the event takes place.</small>
           </div>
-            <div class="row">
-              <div class="form-group col-md-6">
-                <label for="startDate">Start date</label>
-                <p class="input-group" id="startDate">
-                  <input type="text" aria-describedby="startDateHelp" class="form-control" uib-datepicker-popup="{{newEventCtrl.dateFormat}}" ng-model="newEventCtrl.formData.startDatetime" is-open="newEventCtrl.datepicker1.open" datepicker-options="newEventCtrl.dateOptions" ng-required="true" close-text="Close" />
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="newEventCtrl.open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
-                </p>
-                <small id="startDateHelp" class="form-text text-muted">The date when the event starts.</small>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="startTime">Start time</label>
-                <div id="startTime" aria-describedby="startTimeHelp" uib-timepicker ng-model="newEventCtrl.formData.startTime" hour-step="newEventCtrl.timeOptions.hstep" minute-step="newEventCtrl.timeOptions.mstep" show-meridian="false" ng-required="true"></div>
-                <small id="startTimeHelp" class="form-text text-muted">The time when the event starts.</small>
-              </div>
+          <div class="row">
+            <div class="form-group col-md-6" style="margin-top: 35px;">
+              <label for="startDate">Start date</label>
+              <p class="input-group" id="startDate">
+                <input type="text" aria-describedby="startDateHelp" class="form-control" uib-datepicker-popup="{{newEventCtrl.dateFormat}}" ng-model="newEventCtrl.formData.startDatetime" is-open="newEventCtrl.datepicker1.open" datepicker-options="newEventCtrl.dateOptions" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="newEventCtrl.open1()"><i class="glyphicon glyphicon-calendar"></i></button></span>
+              </p>
+              <small id="startDateHelp" class="form-text text-muted">The date when the event starts.</small>
             </div>
-            <div class="row">
-              <div class="form-group col-md-6">
-                <label for="endDate">End date</label>
-                <p class="input-group" id="endDate">
-                  <input type="text" aria-describedby="endDateHelp" class="form-control" uib-datepicker-popup="{{newEventCtrl.dateFormat}}" ng-model="newEventCtrl.formData.endDatetime" is-open="newEventCtrl.datepicker2.open" datepicker-options="newEventCtrl.dateOptions" ng-required="true" close-text="Close" />
-                  <span class="input-group-btn">
-                  <button type="button" class="btn btn-default" ng-click="newEventCtrl.open2()"><i class="glyphicon glyphicon-calendar"></i></button></span>
-                </p>
-                <small id="endDateHelp" class="form-text text-muted">The date when the event ends.</small>
-              </div>
-              <div class="form-group col-md-6">
-                <label for="endTime">End time</label>
-                <div id="endTime" aria-describedby="endTimeHelp" uib-timepicker ng-model="newEventCtrl.formData.endTime" hour-step="newEventCtrl.timeOptions.hstep" minute-step="newEventCtrl.timeOptions.mstep" show-meridian="false" ng-required="true"></div>
-                <small id="endTimeHelp" class="form-text text-muted">The time when the event starts.</small>
-              </div>
+            <div class="form-group col-md-6">
+              <label for="startTime">Start time</label>
+              <div id="startTime" aria-describedby="startTimeHelp" uib-timepicker ng-model="newEventCtrl.formData.startTime" hour-step="newEventCtrl.timeOptions.hstep" minute-step="newEventCtrl.timeOptions.mstep" show-meridian="false" ng-required="true"></div>
+              <small id="startTimeHelp" class="form-text text-muted">The time when the event starts.</small>
             </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6" style="margin-top: 35px;">
+              <label for="endDate">End date</label>
+              <p class="input-group" id="endDate">
+                <input type="text" aria-describedby="endDateHelp" class="form-control" uib-datepicker-popup="{{newEventCtrl.dateFormat}}" ng-model="newEventCtrl.formData.endDatetime" is-open="newEventCtrl.datepicker2.open" datepicker-options="newEventCtrl.dateOptions" ng-required="true" close-text="Close" />
+                <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="newEventCtrl.open2()"><i class="glyphicon glyphicon-calendar"></i></button></span>
+              </p>
+              <small id="endDateHelp" class="form-text text-muted">The date when the event ends.</small>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="endTime">End time</label>
+              <div id="endTime" aria-describedby="endTimeHelp" uib-timepicker ng-model="newEventCtrl.formData.endTime" hour-step="newEventCtrl.timeOptions.hstep" minute-step="newEventCtrl.timeOptions.mstep" show-meridian="false" ng-required="true"></div>
+              <small id="endTimeHelp" class="form-text text-muted">The time when the event starts.</small>
+            </div>
+          </div>
         </div>
         <div class="col-md-6">
           <div class="form-group">
@@ -74,13 +74,26 @@
               <small id="priceHelp" class="form-text text-muted">The participant capacity for the event.</small>
             </div>
           </div>
-
+          <div class="row">
+            <div class="form-group col-md-6" style="margin-top: 35px;">
+              <label for="registrationDeadline">Registration deadline date</label>
+              <p class="input-group" id="registrationDeadline">
+                <input type="text" aria-describedby="endDateHelp" class="form-control" uib-datepicker-popup="{{newEventCtrl.dateFormat}}" ng-model="newEventCtrl.formData.registrationDeadline" is-open="newEventCtrl.datepicker3.open" datepicker-options="newEventCtrl.dateOptions" close-text="Close" />
+                <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="newEventCtrl.open3()"><i class="glyphicon glyphicon-calendar"></i></button></span>
+              </p>
+              <small id="endDateHelp" class="form-text text-muted">Users can register for the event until</small>
+            </div>
+            <div class="col-md-6">
+              <label for="registrationDeadlineTime">Registration deadline time</label>
+                <div id="registrationDeadlineTime" aria-describedby="endTimeHelp" uib-timepicker ng-model="newEventCtrl.formData.registrationDeadlineTime" hour-step="newEventCtrl.timeOptions.hstep" minute-step="newEventCtrl.timeOptions.mstep" show-meridian="false"></div>
+            </div>
+          </div>
           <button type="submit" class="btn btn-primary" style="margin-top: 50px;">Save</button>
           <button class="btn btn-danger" style="margin-top: 50px;">Reset</button>
         </div>
       </div>
     </form>
   </div>
-
   <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
 </div>

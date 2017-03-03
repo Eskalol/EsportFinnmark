@@ -16,7 +16,9 @@ export class NewEventComponent {
     address: '',
     info: '',
     price: '',
-    capacity: ''
+    capacity: '',
+    registrationDeadlineTime: '',
+    registrationDeadline: ''
   };
 
   datepicker1 = {
@@ -24,6 +26,10 @@ export class NewEventComponent {
   };
 
   datepicker2 = {
+    open: false
+  };
+
+  datepicker3 = {
     open: false
   };
 
@@ -63,11 +69,17 @@ export class NewEventComponent {
     this.datepicker2.open = true;
   }
 
+  open3() {
+    this.datepicker3.open = true;
+  }
+
   submit(form) {
     this.formData.startDatetime = this.craftDatetime(this.formData.startDatetime, this.formData.startTime);
     this.formData.endDatetime = this.craftDatetime(this.formData.endDatetime, this.formData.endTime);
+    this.formData.registrationDeadline = this.craftDatetime(this.formData.registrationDeadline, this.formData.registrationDeadlineTime);
     delete this.formData.startTime;
     delete this.formData.endTime;
+    delete this.formData.registrationDeadlineTime;
     var event = new this.Event(this.formData);
     event.$save().then(res => {
       this.$location.path('/admin/event');
