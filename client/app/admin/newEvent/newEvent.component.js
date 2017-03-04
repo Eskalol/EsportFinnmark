@@ -76,13 +76,13 @@ export class NewEventComponent {
   submit(form) {
     this.formData.startDatetime = this.craftDatetime(this.formData.startDatetime, this.formData.startTime);
     this.formData.endDatetime = this.craftDatetime(this.formData.endDatetime, this.formData.endTime);
-    this.formData.registrationDeadline = this.craftDatetime(this.formData.registrationDeadline, this.formData.registrationDeadlineTime);
+    // this.formData.registrationDeadline = this.craftDatetime(this.formData.registrationDeadline, this.formData.registrationDeadlineTime);
     delete this.formData.startTime;
     delete this.formData.endTime;
     delete this.formData.registrationDeadlineTime;
     var event = new this.Event(this.formData);
     event.$save().then(res => {
-      this.$location.path('/admin/event');
+      this.$location.path(`/admin/eventInfo/${res._id}`);
     }).catch(err => {
       console.log(err);
     });
