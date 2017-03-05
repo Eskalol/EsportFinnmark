@@ -8,6 +8,7 @@ import Thing from '../api/thing/thing.model';
 import User from '../api/user/user.model';
 import config from './environment/';
 import Event from '../api/event/event.model';
+import Registration from '../api/registration/registration.model';
 
 export default function seedDatabaseIfNeeded() {
   if(config.seedDB) {
@@ -79,47 +80,64 @@ export default function seedDatabaseIfNeeded() {
           email: 'paasan@example.com',
           password: 'test'
         })
-        .then(() => console.log('finished populating users'))
-        .catch(err => console.log('error populating users', err));
+        .then((user) => {
+          console.log('finished populating users');
+          Event.find({}).remove()
+          .then(() => {
+            Event.create({
+              title: 'Lan party 1',
+              startDatetime: new Date('2016/02/23'),
+              endDatetime: new Date('2016/02/25'),
+              address: 'Karasjok',
+              info: 'Lan og mye morro!',
+              price: 200,
+              capacity: 100
+            }, {
+              title: 'Lan party 2',
+              startDatetime: new Date('2016/08/10'),
+              endDatetime: new Date('2016/08/15'),
+              address: 'Karasjok',
+              info: 'Sommerlan',
+              price: 400,
+              capacity: 150
+            }, {
+              title: 'Finnmark Gathering',
+              startDatetime: new Date('2016/10/1'),
+              endDatetime: new Date('2016/10/5'),
+              address: 'Alta',
+              info: 'ultra bra lan',
+              price: 500,
+              capacity: 500
+            }, {
+              title: 'Minilan',
+              startDatetime: new Date('2017/02/23'),
+              endDatetime: new Date('2017/02/25'),
+              address: 'Alta',
+              info: 'Lan paa huset!',
+              price: 200,
+              capacity: 50
+            })
+            .then((event) => {
+              console.log(`finished populating events${event}`);
+              Registration.find({}).remove()
+                .then(() => {
+                  Registration.create({
+                    user: user._id,
+                    event: event._id,
+                    birthdate: new Date('1980/02/23'),
+                    phone: '12345678',
+                    address: 'cool street',
+                    stayOver: true,
+                    returningHome: new Date('2017/02/23'),
+                    paid: true
+                  }).then((registration) => {
+                    console.log(`finished populating registration${registration}`);
+                  });
+                });
+            }).catch(err => console.log('error populating events', err));
+          });
+        }).catch(err => console.log('error populating users', err));
       });
 
-    Event.find({}).remove()
-      .then(() => {
-        Event.create({
-          title: 'Lan party 1',
-          startDatetime: new Date('2016/02/23'),
-          endDatetime: new Date('2016/02/25'),
-          address: 'Karasjok',
-          info: 'Lan og mye morro!',
-          price: 200,
-          capacity: 100
-        }, {
-          title: 'Lan party 2',
-          startDatetime: new Date('2016/08/10'),
-          endDatetime: new Date('2016/08/15'),
-          address: 'Karasjok',
-          info: 'Sommerlan',
-          price: 400,
-          capacity: 150
-        }, {
-          title: 'Finnmark Gathering',
-          startDatetime: new Date('2016/10/1'),
-          endDatetime: new Date('2016/10/5'),
-          address: 'Alta',
-          info: 'ultra bra lan',
-          price: 500,
-          capacity: 500
-        }, {
-          title: 'Minilan',
-          startDatetime: new Date('2017/02/23'),
-          endDatetime: new Date('2017/02/25'),
-          address: 'Alta',
-          info: 'Lan paa huset!',
-          price: 200,
-          capacity: 50
-        })
-        .then(() => console.log('finished populating events'))
-        .catch(err => console.log('error populating events', err));
-      });
   }
 }

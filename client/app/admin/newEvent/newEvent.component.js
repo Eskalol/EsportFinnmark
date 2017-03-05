@@ -46,7 +46,6 @@ export class NewEventComponent {
 
   constructor(Event, $location) {
     'ngInject';
-    // this.message = 'Hello';
     this.Event = Event;
     this.$location = $location;
   }
@@ -76,7 +75,9 @@ export class NewEventComponent {
   submit(form) {
     this.formData.startDatetime = this.craftDatetime(this.formData.startDatetime, this.formData.startTime);
     this.formData.endDatetime = this.craftDatetime(this.formData.endDatetime, this.formData.endTime);
-    // this.formData.registrationDeadline = this.craftDatetime(this.formData.registrationDeadline, this.formData.registrationDeadlineTime);
+    if(this.formData.registrationDeadline) {
+      this.formData.registrationDeadline = this.craftDatetime(this.formData.registrationDeadline, this.formData.registrationDeadlineTime);
+    }
     delete this.formData.startTime;
     delete this.formData.endTime;
     delete this.formData.registrationDeadlineTime;
