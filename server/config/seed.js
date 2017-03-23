@@ -80,7 +80,7 @@ export default function seedDatabaseIfNeeded() {
           email: 'paasan@example.com',
           password: 'test'
         })
-        .then((user) => {
+        .then(user => {
           console.log('finished populating users');
           Event.find({}).remove()
           .then(() => {
@@ -117,7 +117,7 @@ export default function seedDatabaseIfNeeded() {
               price: 200,
               capacity: 50
             })
-            .then((event) => {
+            .then(event => {
               console.log(`finished populating events${event}`);
               Registration.find({}).remove()
                 .then(() => {
@@ -130,14 +130,15 @@ export default function seedDatabaseIfNeeded() {
                     stayOver: true,
                     returningHome: new Date('2017/02/23'),
                     paid: true
-                  }).then((registration) => {
+                  }).then(registration => {
                     console.log(`finished populating registration${registration}`);
                   });
                 });
-            }).catch(err => console.log('error populating events', err));
+            })
+            .catch(err => console.log('error populating events', err));
           });
-        }).catch(err => console.log('error populating users', err));
+        })
+        .catch(err => console.log('error populating users', err));
       });
-
   }
 }

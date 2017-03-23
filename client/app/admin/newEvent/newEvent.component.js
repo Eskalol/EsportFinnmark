@@ -72,7 +72,7 @@ export class NewEventComponent {
     this.datepicker3.open = true;
   }
 
-  submit(form) {
+  submit() {
     this.formData.startDatetime = this.craftDatetime(this.formData.startDatetime, this.formData.startTime);
     this.formData.endDatetime = this.craftDatetime(this.formData.endDatetime, this.formData.endTime);
     if(this.formData.registrationDeadline) {
@@ -81,10 +81,11 @@ export class NewEventComponent {
     delete this.formData.startTime;
     delete this.formData.endTime;
     delete this.formData.registrationDeadlineTime;
-    var event = new this.Event(this.formData);
+    let event = new this.Event(this.formData);
     event.$save().then(res => {
       this.$location.path(`/admin/eventInfo/${res._id}`);
-    }).catch(err => {
+    })
+    .catch(err => {
       console.log(err);
     });
   }

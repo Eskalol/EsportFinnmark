@@ -8,13 +8,10 @@ import routes from './eventInfo.routes';
 export class EventInfoComponent {
   /*@ngInject*/
 
-
-
   constructor($routeParams, Event) {
     'ngInject';
     console.log($routeParams.id);
     this.event = Event.get({id: $routeParams.id});
-
   }
 }
 
