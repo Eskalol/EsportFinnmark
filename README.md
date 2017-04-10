@@ -1,7 +1,10 @@
-# Finnmark Esport Registration
-
+# Finnmark Esport
 This project was generated with the [Angular Full-Stack Generator](https://github.com/DaftMonk/generator-angular-fullstack) version 4.1.3.
 
+## Health
+[![Build Status](https://travis-ci.org/Eskalol/EsportFinnmark.svg?branch=master)](https://travis-ci.org/Eskalol/EsportFinnmark)
+[![dependencies Status](https://david-dm.org/Eskalol/EsportFinnmark/status.svg)](https://david-dm.org/Eskalol/EsportFinnmark)
+[![devDependencies Status](https://david-dm.org/Eskalol/EsportFinnmark/dev-status.svg)](https://david-dm.org/Eskalol/EsportFinnmark?type=dev)
 ## Getting Started
 
 ### Prerequisites
