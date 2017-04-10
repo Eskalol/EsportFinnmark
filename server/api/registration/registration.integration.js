@@ -107,11 +107,11 @@ describe('Registration API:', function() {
           .send({
             user: normalUser._id,
             event: event._id,
-            birthdate: new Date("1990/06/17"),
+            birthdate: new Date("1990-06-17T00:00:00.000Z"),
             phone: "547544",
             address: "cool address",
             stayOver: true,
-            returningHome: new Date("2017/06/17")
+            returningHome: new Date("2017-06-17T00:00:00.000Z")
           })
           .set('authorization', `Bearer ${token}`)
           .expect(201)
@@ -123,11 +123,11 @@ describe('Registration API:', function() {
             newRegistration = res.body;
             expect(newRegistration.user).to.equal(`${normalUser._id}`);
             expect(newRegistration.event).to.equal(`${event._id}`);
-            expect(newRegistration.birthdate).to.equal("1990-06-16T22:00:00.000Z");
+            expect(newRegistration.birthdate).to.equal("1990-06-17T00:00:00.000Z");
             expect(newRegistration.phone).to.equal("547544");
             expect(newRegistration.address).to.equal("cool address");
             expect(newRegistration.stayOver).to.equal(true);
-            expect(newRegistration.returningHome).to.equal("2017-06-16T22:00:00.000Z");
+            expect(newRegistration.returningHome).to.equal("2017-06-17T00:00:00.000Z");
             done();
         });
       });
