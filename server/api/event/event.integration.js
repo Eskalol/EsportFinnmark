@@ -68,8 +68,8 @@ describe('Event API:', function() {
         .post('/api/lan/event')
         .send({
           title: "cool event",
-          startDatetime: new Date("1990/06/17"),
-          endDatetime: new Date("1990/09/17"),
+          startDatetime: new Date("1990-06-16T22:00:00.000Z"),
+          endDatetime: new Date("1990-09-16T22:00:00.000Z"),
           address: "cool street",
           info: "awesome",
           price: 200,
