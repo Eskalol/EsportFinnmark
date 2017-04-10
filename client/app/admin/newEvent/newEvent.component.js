@@ -51,12 +51,12 @@ export class NewEventComponent {
   }
 
   craftDatetime(date, time) {
-    var timeString = time.getHours() + ':' + time.getMinutes() + ':00';
+    let timeString = time.getHours() + ':' + time.getMinutes() + ':00';
 
-    var year = date.getFullYear();
-    var month = date.getMonth() + 1; // Jan is 0, dec is 11
-    var day = date.getDate();
-    var dateString = '' + year + '-' + month + '-' + day;
+    let year = date.getFullYear();
+    let month = date.getMonth() + 1; // Jan is 0, dec is 11
+    let day = date.getDate();
+    let dateString = '' + year + '-' + month + '-' + day;
     return new Date(dateString + ' ' + timeString);
   }
 
@@ -76,6 +76,7 @@ export class NewEventComponent {
     this.formData.startDatetime = this.craftDatetime(this.formData.startDatetime, this.formData.startTime);
     this.formData.endDatetime = this.craftDatetime(this.formData.endDatetime, this.formData.endTime);
     if(this.formData.registrationDeadline) {
+      console.log("We got a registration deadline wohoo");
       this.formData.registrationDeadline = this.craftDatetime(this.formData.registrationDeadline, this.formData.registrationDeadlineTime);
     }
     delete this.formData.startTime;

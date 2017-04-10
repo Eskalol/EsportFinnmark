@@ -3,7 +3,7 @@
 import mongoose from 'mongoose';
 import {registerEvents} from './event.events';
 
-var EventSchema = new mongoose.Schema({
+let EventSchema = new mongoose.Schema({
   title: {
     type: String,
     required: true
@@ -36,8 +36,9 @@ var EventSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
-  RegistrationDeadline: {
-    type: Date
+  registrationDeadline: {
+    type: Date,
+    default: new Date(2100, 1, 1)
   }
 });
 

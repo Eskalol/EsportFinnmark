@@ -6,19 +6,20 @@
   </div>
   <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>
 </div>
-<div class="row">
 
 <div class="row">
 
   <div class="col-lg-2 col-md-3 col-sm-3 col-xs-1"></div>
 
   <div class="col-lg-8 col-md-8 com-sm-8 col-xs-10 container-fluid">
+
     <div class="container">Address: {{eventInfoCtrl.event.address}}</div>
     <div class="container">Info: {{eventInfoCtrl.event.info}}</div>
     <div class="container">Price: {{eventInfoCtrl.event.price}}</div>
     <div class="container">Capacity: {{eventInfoCtrl.event.capacity}}</div>
     <div class="container">Starting: {{eventInfoCtrl.event.startDatetime | date: 'dd.MM.yyyy hh:mm' }}</div>
     <div class="container">Ending: {{eventInfoCtrl.event.endDatetime | date: 'dd.MM.yyyy hh:mm'}}</div>
+    <div class="container">Registration Deadline: {{eventInfoCtrl.event.registrationDeadline | date: 'dd.MM.yyyy hh:mm' }}</div>
   </div>
 
   <div class="col-lg-2 col-md-1 col-sm-1 col-xs-1"></div>

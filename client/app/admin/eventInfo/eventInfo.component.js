@@ -12,6 +12,7 @@ export class EventInfoComponent {
     'ngInject';
     console.log($routeParams.id);
     this.event = Event.get({id: $routeParams.id});
+    console.log(this.event.registrationDeadline);
   }
 }
 
