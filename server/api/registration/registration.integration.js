@@ -162,11 +162,11 @@ describe('Registration API:', function() {
             }
             expect(res.body.user).to.equal(`${normalUser._id}`);
             expect(newRegistration.event).to.equal(`${event._id}`);
-            expect(res.body.birthdate).to.equal("1990-06-16T22:00:00.000Z");
+            expect(res.body.birthdate).to.equal("1990-06-17T00:00:00.000Z");
             expect(res.body.phone).to.equal("547544");
             expect(res.body.address).to.equal("cool address");
             expect(res.body.stayOver).to.equal(true);
-            expect(res.body.returningHome).to.equal("2017-06-16T22:00:00.000Z");
+            expect(res.body.returningHome).to.equal("2017-06-17T00:00:00.000Z");
             done();
         });
       });
@@ -195,11 +195,11 @@ describe('Registration API:', function() {
             }
             expect(res.body.user).to.equal(`${normalUser._id}`);
             expect(newRegistration.event).to.equal(`${event._id}`);
-            expect(res.body.birthdate).to.equal("1990-06-16T22:00:00.000Z");
+            expect(res.body.birthdate).to.equal("1990-06-17T00:00:00.000Z");
             expect(res.body.phone).to.equal("123456");
             expect(res.body.address).to.equal("new");
             expect(res.body.stayOver).to.equal(true);
-            expect(res.body.returningHome).to.equal("2017-06-16T22:00:00.000Z");
+            expect(res.body.returningHome).to.equal("2017-06-17T00:00:00.000Z");
             done();
         });
       });
@@ -216,11 +216,11 @@ describe('Registration API:', function() {
             }
             expect(res.body.user).to.equal(`${normalUser._id}`);
             expect(newRegistration.event).to.equal(`${event._id}`);
-            expect(res.body.birthdate).to.equal("1990-06-16T22:00:00.000Z");
+            expect(res.body.birthdate).to.equal("1990-06-17T00:00:00.000Z");
             expect(res.body.phone).to.equal("123456");
             expect(res.body.address).to.equal("new");
             expect(res.body.stayOver).to.equal(true);
-            expect(res.body.returningHome).to.equal("2017-06-16T22:00:00.000Z");
+            expect(res.body.returningHome).to.equal("2017-06-17T00:00:00.000Z");
             done();
           });
       });
@@ -242,7 +242,7 @@ describe('Registration API:', function() {
           .patch(`/api/lan/registration/${newRegistration._id}`)
           .send([
             { op: 'replace', path: '/stayOver', value: false },
-            { op: 'replace', path: '/returningHome', value: new Date("2017/08/17") }
+            { op: 'replace', path: '/returningHome', value: new Date("2017-08-16T22:00:00.000Z") }
           ])
           .set('authorization', `Bearer ${token}`)
           .expect(200)
@@ -253,7 +253,7 @@ describe('Registration API:', function() {
             }
             expect(res.body.user).to.equal(`${normalUser._id}`);
             expect(newRegistration.event).to.equal(`${event._id}`);
-            expect(res.body.birthdate).to.equal("1990-06-16T22:00:00.000Z");
+            expect(res.body.birthdate).to.equal("1990-06-17T00:00:00.000Z");
             expect(res.body.phone).to.equal("123456");
             expect(res.body.address).to.equal("new");
             expect(res.body.stayOver).to.equal(false);
@@ -363,11 +363,11 @@ describe('Registration API:', function() {
           .post('/api/lan/registration/me')
           .send({
             event: event._id,
-            birthdate: new Date("1992/06/17"),
+            birthdate: new Date("1990-06-17T00:00:00.000Z"),
             phone: "135154",
             address: "wall street",
             stayOver: true,
-            returningHome: new Date("2017/12/17")
+            returningHome: new Date("2017-12-16T23:00:00.000Z")
           })
           .set('authorization', `Bearer ${token}`)
           .expect(201)
@@ -379,7 +379,7 @@ describe('Registration API:', function() {
             newRegistration = res.body;
             expect(newRegistration.user).to.equal(`${user._id}`);
             expect(newRegistration.event).to.equal(`${event._id}`);
-            expect(newRegistration.birthdate).to.equal("1992-06-16T22:00:00.000Z");
+            expect(newRegistration.birthdate).to.equal("1990-06-17T00:00:00.000Z");
             expect(newRegistration.phone).to.equal("135154");
             expect(newRegistration.address).to.equal("wall street");
             expect(newRegistration.stayOver).to.equal(true);
@@ -416,7 +416,7 @@ describe('Registration API:', function() {
             }
             expect(newRegistration.user).to.equal(`${user._id}`);
             expect(newRegistration.event).to.equal(`${event._id}`);
-            expect(newRegistration.birthdate).to.equal("1992-06-16T22:00:00.000Z");
+            expect(newRegistration.birthdate).to.equal("1990-06-17T00:00:00.000Z");
             expect(newRegistration.phone).to.equal("135154");
             expect(newRegistration.address).to.equal("wall street");
             expect(newRegistration.stayOver).to.equal(true);
